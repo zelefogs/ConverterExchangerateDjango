@@ -1,0 +1,43 @@
+{% extends 'converter/base.html' %}
+{% block content %}
+    <div class="row g-1">
+    <h1 style="text-align: center">Simple convert currency</h1>
+    </div>
+    <form method="post" action="/">
+        {% csrf_token %}
+
+        <div class="mt-2 row g-3">
+            <div class="col">
+                <input class="form-control" type="float" name="first" value="{% if first_amount %}{{ first_amount }}{% else %}0{% endif %}">
+
+                <small>1 {{ cur_first }}={{ help_amount }} {{ cur_second }}</small>
+                <select class="form-select" aria-label="Default select example" name="cur_first">
+                    <option selected>
+                        {{ cur_first }}
+                    </option>
+                    {%  for item in data %}
+                        <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+
+                </select>
+            </div>
+        <div class="col" style="text-align: center; vertical-align: bottom">
+            <button class="btn btn-primary" style="text-align: center; vertical-align: bottom">Convert</button>
+        </div>
+        <div class="col">
+            <input class="form-control" type="number" name="second" value="{% if second_amount %}{{ second_amount }}{% else %}0{% endif %}">
+            <small>1 {{ cur_second }}={{ help2_amount }} {{ cur_first }}</small>
+            <select class="form-select" aria-label="Default select example" name="cur_second">
+                <option selected>
+                    {{ cur_second }}
+                </option>
+                {%  for item in data %}
+                    <option value="{{ item }}">{{ item }}</option>
+                {% endfor %}
+
+
+            </select>
+        </div>
+    </div>
+    </form>
+{% endblock %}
